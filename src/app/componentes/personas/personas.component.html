@@ -1,0 +1,82 @@
+<h3>Listado de Estudiantes</h3>
+
+<div class="d-flex justify-content-end">
+    <button class="btn btn-primary mb-2" (click)="btnAgregarPersona()">Añadir nuevo estudiante</button>
+</div>
+
+
+<!-- Formulario -->
+
+<div class="mt-2 mb-5 d-flex flex-column" *ngIf="verFormulario">
+  <!--Agrego el form grup para nombrar al formulario como un grupo de controles-->
+  <form [formGroup]="formPersonas">
+
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <label class="form-label">DNI</label>
+          <input type="number" class="form-control" placeholder="Ingrese su número de documento" formControlName="dni">
+        </div>
+
+
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" placeholder="name@example.com" formControlName="email">
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <label class="form-label">Nombre y Apellido</label>
+          <input type="text" class="form-control" placeholder="Escriba su nombre y apellido" formControlName="nombre_apellido">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Fecha de Nacimiento</label>
+          <input type="date" class="form-control" formControlName="fecha_nacimiento">
+        </div>
+      </div>
+    </div>
+
+    <div class="float-center mt-3">
+      <button type="submit" class="btn btn-success me-3">Guardar estudiante</button>
+      <button type="button" class="btn btn-danger" (click)="btnCancelar()">Cancelar</button>
+    </div>
+  </form>
+  <!--Se puede utilizar esta función para realizar un debug del formulario-->
+  <pre>{{formPersonas.value | json}}</pre>
+</div>
+
+
+<!-- Tabla de Datos -->
+<table class="table table-hover table-warning mt-2 table-responsive-xl">
+    <thead>
+      <tr>
+        <th scope="col">DNI</th>
+        <th scope="col">Nombre y Apellido</th>
+        <th scope="col">Email</th>
+        <th scope="col">Fecha de Nacimiento</th>
+        <th scope="col">#</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let persona of listaPersonas">
+        <td>{{persona.dni}}</td>
+        <td>{{persona.nombre_apellido}}</td>
+        <td>{{persona.email}}</td>
+        <td>{{persona.fecha_nacimiento}}</td>
+        <td>
+          <button type="button" class="btn btn-warning text-white me-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+            </svg>
+          </button>
+          <button type="button" class="btn btn-danger">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+              <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+            </svg>
+          </button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
